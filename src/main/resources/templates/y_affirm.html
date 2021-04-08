@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover" />
+    <link rel="stylesheet" href="asserts/css/weui.min.css" />
+    <script type="text/javascript" src="asserts/js/jquery.min.js" ></script>
+    <title>月儿猕猴桃</title>
+</head>
+<body ontouchstart>
+<div class="weui-form-preview">
+    <div class="weui-form-preview__hd">
+        <label class="weui-form-preview__label">收货人</label>
+        <em class="weui-form-preview__value" th:text="${item.uname}"></em>
+    </div>
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">手机号</label>
+            <span class="weui-form-preview__value" th:text="${item.utel}"></span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">规格</label>
+            <span class="weui-form-preview__value" th:text="${item.price}+'*'+${item.number}"></span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">收货地址</label>
+            <span class="weui-form-preview__value" th:text="${item.address}"></span>
+        </div>
+    </div>
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_default" href="http://localhost:8081/yueer">重新填写</a>
+        <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick='submit()'>确认</button>
+    </div>
+</div>
+<div class="weui-cells__tips">请确认发货信息填写无误，客服不再二次确认</div>
+<div class="weui-gallery" id="gallery">
+    <span class="" id="galleryImg"><img id="img" src="" class="weui-gallery__img" style="top:10%; left:0; width: 100%;"></img></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">扫码支付</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files" >
+                        <li id="uploaderFiles" style="background-image:url(asserts/img/wxpay.png)"><img class="weui-uploader__file" src="asserts/img/wxpay.png"></li>
+                        <li id="uploaderFilese" style="background-image:url(asserts/img/zfbpay.jpg)"><img class="weui-uploader__file" src="asserts/img/zfbpay.jpg"></li>
+                        <!--<li class="weui-uploader__file" style="background-image:url(../img/zfbpay.jpg)"></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui-cells__tips">扫码支付请备注收货人姓名，您也可以联系客服通过微信支付宝转账支付</div>
+<script type="text/javascript">
+    /*var ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i)!="micromessenger")
+    {
+        window.location = "https://www.xiangyundiaocha.club/yueermht/error.html";
+    }*/
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() { WeixinJSBridge.call('hideOptionMenu'); });
+    $(function(){
+        var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+            $gallery = $("#gallery"), $galleryImg = $("#galleryImg"),
+            $uploaderInput = $("#uploaderInput"),
+            $uploaderFiles = $("#uploaderFiles"),
+            $uploaderFilese = $("#uploaderFilese")
+        ;
+
+        $uploaderInput.on("change", function(e){
+            var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+
+                $uploaderFiles.append($(tmpl.replace('#url#', src)));
+                $("#img").attr("src",src);
+            }
+        });
+        $uploaderFiles.on("click", function(){
+            $("#img").attr("src","asserts/img/wxpay.png");
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+
+        $uploaderFilese.on("click", function(){
+            $("#img").attr("src","asserts/img/zfbpay.jpg");
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+    });
+    function submit(){
+        /*$.post("https://www.xiangyundiaocha.club/yueermht/php/status.php",
+            {
+                id: <?php echo $id; ?>,
+        status:'1'
+    },
+        function(data){
+            console.log(data);
+            if(data=="1"){
+                alert("操作成功");
+            }
+            else{
+                alert('操作失败');
+            }
+        });*/
+    }
+</script>
+</body>
+</html>

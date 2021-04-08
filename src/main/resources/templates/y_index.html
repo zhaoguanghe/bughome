@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover" />
+    <link rel="stylesheet" href="asserts/css/y_index.css" />
+    <link rel="stylesheet" href="asserts/css/weui.min.css" />
+    <link rel="stylesheet" href="asserts/css/weuixx.css" />
+    <script type="text/javascript" src="asserts/js/jquery.min.js" ></script>
+    <title>月儿猕猴桃</title>
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">填写数据不完整</div>
+<div class="window">
+    <ul class="pic">
+        <li>
+            <a href="javascript:;"><img src="asserts/img/cuixiang.jpg"></a>
+        </li>
+        <li>
+            <a href="javascript:;"><img src="asserts/img/cuixiang001.jpg" alt=""></a>
+        </li>
+        <li>
+            <a href="javascript:;"><img src="asserts/img/mhtxz.jpg" alt=""></a>
+        </li>
+        <li>
+            <a href="javascript:;"><img src="asserts/img/mhtjbz.jpg" alt=""></a>
+        </li>
+        <li>
+            <a href="javascript:;"><img src="asserts/img/921.jpg" alt=""></a>
+        </li>
+        <li>
+            <a href="javascript:;"><img src="asserts/img/917.jpg" alt=""></a>
+        </li>
+    </ul>
+    <!--<a href="javascript:;" class="btn btn-prev">&lt;</a>
+    <a href="javascript:;" class="btn btn-next">&gt;</a>-->
+    <div class="indexCt">
+        <ul class="pageIndex clearfix"></ul>
+    </div>
+</div>
+<div class="weui-cells__title">开始下单</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+        <div class="weui-cell__bd">
+            <input id="name" class="weui-input" type="text" placeholder="请输入收件人姓名"/>
+            <!--<input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入qq号"/>-->
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">手机号</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input id="tel" class="weui-input" type="tel" placeholder="请输入收件人手机号"/>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">收货地址</label>
+        </div>
+        <div class="weui-cell__bd">
+            <textarea id="address" class="weui-textarea" placeholder="请输入收货人详细地址，例如：陕西省西安市周至县猕猴桃基地123号" rows="3"></textarea>
+            <div class="weui-textarea-counter"><span>0</span>/200</div>
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label class="weui-label">规格</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select class="weui-select" name="price" id="price">
+                <option value="箱装/2.5kg/55元">箱装/2.5kg/55元</option>
+                <option value="2箱装/5kg/100元">2箱装/5kg/100元</option>
+                <option value="小果/2.5kg/40元">小果/2.5kg/40元</option>
+                <option value="精装/2.5kg/60元">精装/2.5kg/60元</option>
+            </select>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">数量</label>
+        </div>
+        <div class="weui-cell__ft">
+            <div class="weui-count">
+                <a class="weui-count__btn weui-count__decrease"></a>
+                <input id="num" class="weui-count__number" type="number" value="1">
+                <a class="weui-count__btn weui-count__increase"></a>
+            </div>
+        </div>
+    </div>
+    <!--<div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="date" value=""/>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">时间</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="datetime-local" value="" placeholder=""/>
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="number" placeholder="请输入验证码"/>
+        </div>
+        <div class="weui-cell__ft">
+            <img class="weui-vcode-img" src="./images/vcode.jpg" />
+        </div>
+    </div>-->
+</div>
+<div class="weui-cells__tips">填写完成请通知月儿猕猴桃客服(V+TEL:13515318102/15066663806)发货&nbsp;<a href="select.html" th:href="@{http://localhost:8081/select.html}">快递单号查询</a></div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="Submit()">提交</a>
+</div>
+<script>
+    var MAX = 99, MIN = 1;
+    $('.weui-count__decrease').click(function (e) {
+        var $input = $(e.currentTarget).parent().find('.weui-count__number');
+        var number = parseInt($input.val() || "0") - 1
+        if (number < MIN) number = MIN;
+        $input.val(number)
+    })
+    $('.weui-count__increase').click(function (e) {
+        var $input = $(e.currentTarget).parent().find('.weui-count__number');
+        var number = parseInt($input.val() || "0") + 1
+        if (number > MAX) number = MAX;
+        $input.val(number)
+    })
+</script>
+<script>
+    //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() { WeixinJSBridge.call('hideOptionMenu'); });
+    /*var ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i)!="micromessenger")
+    {
+        window.location = "https://www.xiangyundiaocha.club/yueermht/error.html";
+    }*/
+    //}else{
+    var i=0;
+    const p = document.getElementsByClassName('window')[0];
+    const c = document.getElementsByClassName('pic')[0];
+    const ifLoop = true;
+    let children = c.children;
+    let width = 0;
+    //注意三个xxWidth值的区别，clientWidth包含了页面右侧滑轨的宽度
+    // let sliderWidth = p.clientWidth;
+    // let sliderWidth = p.offsetWidth;
+    let sliderWidth = window.innerWidth;
+    for(let i=0;i<children.length;i++) {
+        let child = children[i];
+        child.style.width = sliderWidth + 'px';
+        width += sliderWidth;
+    };
+    p.style.width = sliderWidth;
+    function Submit(){
+        let name = $('#name').val();
+        let tel = $('#tel').val();
+        let address = $('#address').val();
+        let price = $('#price option:selected').val();
+        let num = $('#num').val();
+        if(i<1){
+            if(name != "" && tel != "" && address != ""){
+                alert(name+tel+address+price+num);
+                $.post("http://localhost:8081/addOrder",
+                    {
+                        uname:name,
+                        utel:tel,
+                        address:address,
+                        price:price,
+                        number:num
+                    },
+                    function(data){
+                        console.log(data);
+                        if(data>0 && data<99999){//返回id
+                            alert('提交成功');
+                            i+=1;
+                            window.location.href = "http://localhost:8081/affirm?id="+data;
+                        }
+                        else{
+                            alert('提交失败');
+                            console.log(data);}
+                    });
+            }else
+            {
+                var $tooltips = $('.js_tooltips');
+                if ($tooltips.css('display') != 'none') return;
+                $tooltips.css('display', 'block');
+                setTimeout(function () {
+                    $tooltips.css('display', 'none');
+                }, 2000);
+            }
+        }else{
+            alert("重复提交！如需再次预定请重新打开网页");
+        }
+    }
+    function Carousel($node) {
+        this.$pic = $node.find('.pic')	//ul
+        this.$picWidth = this.$pic.children().width()  	//宽度
+        this.picLength = this.$pic.children().length    //图片数量
+        this.$btnPrev = $node.find('.btn-prev')    //前滚按钮
+        this.$btnNext = $node.find('.btn-next')	   //后滚按钮
+        this.$pageIndex = $node.find('.pageIndex') //导航小点
+        this.mark = 0  //计数用
+        this.lock = false  //用来锁定的，原作者并没有写锁定函数
+        this.init()
+        this.bind()
+        this.autoPlay()
+        this.lockPic()
+    }
+
+    Carousel.prototype = {
+        //初始化
+        init: function() {
+            var $picFirst = this.$pic.children().eq(0).clone(),
+                $picLast = this.$pic.children().eq(this.picLength - 1).clone()
+            this.$pic.prepend($picLast)//前插一个li
+            this.$pic.append($picFirst)//后加一个li
+            this.$pic.width(this.$picWidth * this.$pic.children().length)//设置ul长度
+            this.$pic.css({
+                'left': -this.$picWidth
+            })//隐藏第一个li
+
+            for (var i = 0; i < this.picLength; i++) {
+                var $li = $('<li></li>')
+                this.$pageIndex.append($li)
+            }//创建html
+
+            this.$pageIndex.children().eq(0).addClass('active')//初始第一个导航设为活动
+        },
+        //播放下一个
+        playNext: function() {
+            var _this = this//把实例赋值给_this，下面的回调函数会导致this指向全局，所以这里先保存this
+            if (this.lock) {//锁定图片
+                return
+            } else {
+                this.lock = true
+                this.$pic.animate({
+                    'left': '-=' + this.$picWidth//整个ul向左平移一个图片的长度
+                }, function() {
+                    _this.mark++//计数+1
+                    if (_this.mark === _this.picLength) {//当计数=4
+                        _this.$pic.css('left', -_this.$picWidth)//将ul的位置还原
+                        _this.mark = 0//还原计数
+                    }
+                    _this.lock = false
+                    _this.showBullet()//设置导航小点样式
+                })
+            }
+        },
+
+        //播放上一个
+        playPrev: function() {
+            var _this = this
+            if (this.lock) {
+                return
+            } else {
+                this.lock = true
+                this.$pic.animate({
+                    'left': '+=' + this.$picWidth
+                }, function() {
+                    _this.mark--
+                    if (_this.mark < 0) {
+                        _this.$pic.css('left', -(_this.picLength * _this.$picWidth))
+                        _this.mark = _this.picLength - 1
+                    }
+                    _this.lock = false
+                    _this.showBullet()
+                })
+            }
+        },
+        //设置导航小点样式
+        showBullet: function() {
+            this.$pageIndex.children().removeClass('active')
+            this.$pageIndex.children().eq(this.mark).addClass('active')
+
+        },
+        //绑定事件
+        bind: function() {
+            var _this = this
+
+            this.$btnNext.on('click', function() {
+                _this.playNext()
+
+            })
+
+            this.$btnPrev.on('click', function() {
+                _this.playPrev()
+
+            })
+            //绑定导航小点事件
+            this.$pageIndex.on('click', 'li', function() {
+                _this.mark = _this.$pageIndex.children().index($(this))//设置计数
+                _this.showBullet()
+                _this.$pic.animate({
+                    'left': -(_this.mark + 1) * _this.$picWidth//设置位移
+                })
+                clearInterval(timer)//清除原来的计时器，否则在下一次切换的时候会很奇怪
+                _this.autoPlay()//重新播放
+            })
+
+        },
+        //自动播放下一张
+        autoPlay: function() {
+            var _this = this
+            timer = setInterval(function() {
+                _this.playNext()
+            }, 3000)//3s调用一次播放下一张函数
+        },
+        //（自添加）锁定图片
+        lockPic: function() {
+            var _this = this
+            this.$pic.mouseenter(function(){
+                _this.lock = true
+            })//鼠标移入播放暂停
+            this.$pic.mouseleave(function(){
+                _this.lock = false
+            })//鼠标移出播放重新开始
+        }
+    }
+
+    new Carousel($('.window'))
+    //}
+</script>
+</body>
+</html>

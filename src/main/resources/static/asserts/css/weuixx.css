@@ -1,0 +1,50 @@
+.weui-count {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+}
+.weui-count .weui-count__btn {
+    height: 21px;
+    width: 21px;
+    line-height: 21px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #07c160;
+    border-radius: 50%;
+    vertical-align: -6px;
+}
+.weui-count .weui-count__btn:after,
+.weui-count .weui-count__btn:before {
+    content: " ";
+    position: absolute;
+    height: 1px;
+    width: 11px;
+    background-color: #07c160;
+    left: 50%;
+    top: 50%;
+    margin-left: -5.5px;
+}
+.weui-count .weui-count__btn:after {
+    height: 11px;
+    width: 1px;
+    margin-top: -5.5px;
+    margin-left: -1px;
+}
+.weui-count .weui-count__decrease:after {
+    display: none;
+}
+.weui-count .weui-count__increase {
+    background-color: #07c160;
+}
+.weui-count .weui-count__increase:after,
+.weui-count .weui-count__increase:before {
+    background-color: white;
+}
+.weui-count .weui-count__number {
+    background-color: transparent;
+    font-size: .8rem;
+    border: 0;
+    width: 2.3rem;
+    text-align: center;
+    color: #5f646e;
+}

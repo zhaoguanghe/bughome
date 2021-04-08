@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="fly-panel fly-column" th:fragment="copy">
+    <div class="layui-container">
+        <!--<a class="fly-logo" href="/">
+            <img src="asserts/img/logo.jpg"/>
+        </a>-->
+        <ul class="layui-clear">
+            <li class="layui-hide-xs layui-this"><a href="/">BUG之家</a></li>
+            <li><a href="jie/index.html">提问<span class="layui-badge-dot"></span></a></li>
+            <li><a href="jie/index.html">回答</a></li>
+            <li><a href="jie/index.html">分类</a></li>
+            <li><a href="jie/index.html">建议</a></li>
+            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
+
+            <!-- 用户登入后显示 -->
+            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html">我发表的贴</a></li>
+            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li>
+
+            <li class="layui-nav-item">
+                <a href="login">登入</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="user/reg.html">注册</a>
+            </li>
+            <li class="layui-nav-item">
+                <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
+            </li>
+        </ul>
+
+          <div class="fly-column-right layui-hide-xs">
+               <span class="fly-search"><i class="layui-icon"></i></span>
+               <a href="http://localhost:8081/editor" class="layui-btn">发表新帖</a>
+          </div>
+          <!--<div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
+             <a href="jie/add.html" class="layui-btn">发表新帖</a>
+          </div>-->
+    </div>
+</div>
+</body>
+</html>
