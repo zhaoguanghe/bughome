@@ -52,11 +52,4 @@ public class ServiceController {
     public Item queryItem(@RequestParam("id") int id){
         return itemMapper.getItem(id);
     }
-
-//    @GetMapping("/queryArticle")
-//    public Article queryArticle(@RequestParam("id") int id){
-//        return articleMapper.getItem(id);
-//    }
-
-
 }

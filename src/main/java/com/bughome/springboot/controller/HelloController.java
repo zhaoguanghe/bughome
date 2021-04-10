@@ -62,10 +62,10 @@ public class HelloController {
         return "y_affirm";
     }
 
-    @RequestMapping("/detail")
+    /*@RequestMapping("/detail")
     public String detail(){
         return "detail";
-    }
+    }*/
 
     @RequestMapping("/editor")
     public String editor(){

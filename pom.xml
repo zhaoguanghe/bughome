@@ -69,6 +69,14 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- spring-boot-devtools 最重要的功能就是热部署。它会监听 classpath 下的文件变动，并且会立即重启应用。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>    <!--不能被其它模块继承，如果多个子模块可以去掉  不必须-->
+            <scope>runtime</scope>     <!--只在运行时起作用  打包时不打进去-->
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,6 +85,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--热部署-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--fork :  如果没有该项配置，devtools不会起作用，即应用不会restart   这个要手动加进去 -->
+                    <fork>true</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>

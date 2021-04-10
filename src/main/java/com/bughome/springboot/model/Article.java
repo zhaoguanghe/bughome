@@ -1,5 +1,7 @@
 package com.bughome.springboot.model;
 
+import java.util.Date;
+
 /**
  * @Author Zgh
  * @Date 2021/3/9 15:09
@@ -10,7 +12,7 @@ public class Article {
     private String Title;
     private String Abstract;
     private String Content;
-    private String Up_time ;
+    private Date Up_time;
 
     public Integer getId() {
         return Id;
@@ -52,11 +54,11 @@ public class Article {
         Content = content;
     }
 
-    public String getUp_time() {
+    public Date getUp_time() {
         return Up_time;
     }
 
-    public void setUp_time(String up_time) {
+    public void setUp_time(Date up_time) {
         Up_time = up_time;
     }
 }

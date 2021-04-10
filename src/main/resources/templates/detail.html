@@ -8,64 +8,57 @@
     <meta name="description" content="BUG之家是中国程序员BUG问答社区，致力于成为中国程序员BUG问答第一平台" />
     <link rel="stylesheet" href="asserts/layui/css/layui.css" />
     <link rel="stylesheet" href="asserts/css/global.css" />
+    <script type="text/javascript" src="asserts/js/jquery.min.js" ></script>
     <script src="asserts/layui/layui.js"></script>
-
 </head>
 <body>
 <div th:insert="~{header :: copy}"></div>
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
-        <div class="map">
-            <span class="layui-breadcrumb">
-                <a href="@{http://localhost:8081/index}">首页</a>
-                <a><cite>正文</cite></a>
-            </span>
-        </div>
-        <div class="layui-col-md8 layui-col-lg8">
-            <div class="title-article">
-                <h1>{{cards.Title}}</h1>
-                <div class="title-msg">
-                    <span><i class="layui-icon">&#xe612;</i> {{cards.Author}}</span>
-                    <span><i class="layui-icon">&#xe60e;</i> {{cards.Up_time}} </span>
-                    <span><i class="layui-icon">&#xe62c;</i> 0℃</span>
-                    <span><i class="layui-icon">&#xe63a;</i> 0条</span>
+        <div class="layui-col-md8">
+        <div class="fly-panel detail-box">
+            <h1 th:text="${article.Title}"></h1>
+            <div class="fly-detail-info">
+                <!-- <span class="layui-badge">审核中</span> -->
+                <a href="list-1-1.html" class="layui-badge layui-bg-green fly-detail-column">新版块</a>
+                <span class="layui-badge" style="background-color:#999">无标签</span>
+                <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
+                <span class="layui-badge layui-bg-red">精帖</span><span class="layui-badge layui-bg-black">置顶</span>
+
+                <div class="fly-admin-box" data-id="123"></div>
+
+                <span class="fly-list-nums">
+			<i class="iconfont" title="回复数"></i> 0
+			<i class="iconfont" title="浏览量"></i> 4789
+		</span>
+            </div>
+            <div class="detail-about">
+                <a class="fly-avatar" href="center-1.html">
+                    <img src="asserts/img/logo.jpg" alt="puyuetian">
+                </a>
+                <div class="fly-detail-user">
+                    <a href="center-1.html" class="fly-link">
+                        <cite th:text="${article.Author}"></cite>
+                        <i class="iconfont icon-renzheng" title="已认证"></i>
+                        <!--<i class="layui-badge fly-badge-vip">自由达人</i>-->
+                    </a>
+                    <span th:text="${article.Up_time}">2018-11-01 21:24:21</span>
+                </div>
+                <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
+                    <span style="padding-right: 10px; color: #FF7200">用户等级：0级</span>
                 </div>
             </div>
-            <div id="content1" hidden="hidden">
-                {{cards.Content}}
+
+            <div id="content1" hidden="hidden" >
+                <div th:text="${article.Content}"></div>
             </div>
-            <div class="text" itemprop="articleBody" id="article_content">
+            <div class="detail-body photos readcontent" itemprop="articleBody" id="article_content">
 
             </div>
-            <div class="tags-text">
-                <i class="layui-icon">&#xe66e;</i> CV
-            </div>
-            <div class="copy-text">
-                <div>
-                    <p>非特殊说明，本博所有文章均为博主原创。</p>
-                    <p class="hidden-xs">如若转载，请注明出处：<a href="{{url}}">{{url}}</a> </p>
-                </div>
-            </div>
-            <div class="page-text">
-                <div>
-                    <span class="layui-badge layui-bg-gray">上一篇</span>
-                    {% if cards.Id > 1 %}<!--参考https://www.cnblogs.com/captainmeng/p/8794941.html-->
-                    <a href="{{url_for('article',post_id=cards.Id-1)}}">Go</a>
-                    {% else %}
-                    <text>没有了</text>
-                    {% endif %}
-                </div>
-                <div>
-                    <span class="layui-badge layui-bg-gray">下一篇</span>
-                    {% if cards.Id < count %}
-                    <a href="{{url_for('article',post_id=cards.Id+1)}}">Go</a>
-                    {% else %}
-                    <text>没有了</text>
-                    {% endif %}
-                </div>
-            </div>
+            <a name="postreplyposition">111222</a>
+            <div style="border-top:solid 1px #F2F2F2;padding-top:15px;font-size:12px;">楼主签名：HadSky演示站</div>
         </div>
-
+        </div>
         <div class="layui-col-md4">
             <div class="fly-panel">
                 <h3 class="fly-panel-title">温馨通道</h3>

@@ -10,10 +10,14 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
     <link type="text/css" href="asserts/css/sample.css" rel="stylesheet" media="screen" />
     <link rel="stylesheet" href="asserts/layui/css/layui.css" />
     <link rel="stylesheet" href="asserts/css/global.css" />
+    <script type="text/javascript" src="asserts/js/jquery.min.js" ></script>
     <title>editor</title>
 </head>
 <body>
 <div th:insert="~{header :: copy}"></div>
+<input id="Title" type="text" placeholder="请输入文章名"/>
+<input id="Abstract" type="text" placeholder="请输入文章简介"/>
+<input id="Author" type="text" placeholder="请输入作者"/>
 <main>
     <div class="message">
         <div class="centered">
@@ -43,20 +47,95 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
         </div>
     </div>
 </main>
+<div class="fly-column-left">
+    <a id="submit" class="layui-btn" onclick="Submit()">提交</a>
+</div>
 <div th:insert="~{footer :: copy}"></div>
 <script src="asserts/js/ckeditor.js"></script>
 
 <script>
+    var i = 0;
     ClassicEditor
         .create( document.querySelector( '#editor' ), {
             toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
         } )
         .then( editor => {
         window.editor = editor;
-    } )
+        var btn = document.querySelector('#submit')
+        btn.onclick = () => {
+        var content = editor.getData();
+        //console.log(content);
+        var Title = $('#Title').val();
+        var Abstract = $('#Abstract').val();
+        var Author = $('#Author').val();
+        if (i < 1) {
+            if (Title != "" && Abstract != "" && Author != "") {
+                console.log(content + Abstract + Title + Author);
+                $.post("http://localhost:8081/addArticle",
+                    {
+                        Author: "清风思月",
+                        Abstract: "暂无",
+                        Title: "文章",
+                        Content: content
+                    },
+                    function (data) {
+                        console.log(data);
+                        if (data > 0 && data < 99999) {//返回id
+                            alert('提交成功');
+                            i += 1;
+                            window.location.href = "http://localhost:8081/detail?id=" + data;
+                        } else {
+                            alert('提交失败');
+                            console.log(data);
+                        }
+                    });
+            } else {
+                alert("请填写完整！");
+            }
+        } else {
+            alert("请勿重复提交！");
+        }
+    }
+    })
     .catch( err => {
         console.error( err.stack );
-    } );
+    });
+    /*
+    function Submit() {
+        var oEditor = CKEDITOR.instances.content;
+        var Content = oEditor.getData();
+        alert(Content);
+        var Title = $('#Title').val();
+        var Abstract = $('#Abstract').val();
+        var Author = $('#Author').val();
+        if (i < 1) {
+            if (Title != "" && Abstract != "" && Author != "") {
+                alert(Content + Abstract + Content + Author);
+                $.post("http://localhost:8081/addArticle",
+                    {
+                        Author: Author,
+                        Abstract: Abstract,
+                        Title: Title,
+                        Content: Content
+                    },
+                    function (data) {
+                        console.log(data);
+                        if (data > 0 && data < 99999) {//返回id
+                            alert('提交成功');
+                            i += 1;
+                            window.location.href = "http://localhost:8081/detail?id=" + data;
+                        } else {
+                            alert('提交失败');
+                            console.log(data);
+                        }
+                    });
+            } else {
+                alert("请填写完整！");
+            }
+        } else {
+            alert("请勿重复提交！");
+        }
+    }*/
 </script>
 </body>
 </html>

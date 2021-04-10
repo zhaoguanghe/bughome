@@ -8,6 +8,13 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.bughome.springboot.model
 
+spring:
+  #热部署插件
+  devtools:
+    restart:
+      #需要实时更新的目录
+      additional-paths: resources/**,static/**,templates/**
+
 person:
   lastname: zhangsan
   age: 18

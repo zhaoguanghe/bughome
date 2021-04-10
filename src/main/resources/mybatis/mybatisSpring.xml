@@ -15,4 +15,8 @@
         <property name="mapperInterface" value="com.bughome.springboot.mapper.ItemMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="ArticleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.bughome.springboot.mapper.ArticleMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>
